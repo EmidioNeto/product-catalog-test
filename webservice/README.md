@@ -22,7 +22,7 @@ Para realizar o cache das requisições, sugiro construir um middleware para armaz
 - Criar um banco MySQL e executar os arquivos data/DDL.sql e data/DML.sql
 - Executar o composer para instalar as dependências
 - Atualizar o arquivo config/autoload/doctrine.local.php com as configurações da instância MySQL criada
-
+- Para testar a validação desenvolvidada, envie uma requisição POST para "/catalog" com o conteúdo do arquivo JSON ou execute o arquivo php "test_wms.php"
 ### WSM webservice
 GET:
 /wms
