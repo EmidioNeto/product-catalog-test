@@ -6,7 +6,7 @@
 - Modelo relacional
 - MySQL ou PostgreSQL
 - Garante consistência dos dados mas não é tão perfomático quanto um não-relacional
-- Script de estrutura do banco de dados (DDL.sql)
+- Script de estrutura do banco de dados (data/DDL.sql)
 - ![Diagrama entidade relacionamento](DER.png)
 
 ### Segunda Opção
