@@ -7,16 +7,20 @@ use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router;
 use App\Resource\AbstractResource;
 
-class StockAction extends AbstractResource {
+class StockAction extends AbstractResource
+{
 
-    public function __invoke(ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, callable $next = null) {
+    public function __invoke(ServerRequestInterface $request,
+                             \Psr\Http\Message\ResponseInterface $response,
+                             callable $next = null)
+    {
         try {
-            $sku = $request->getAttribute('sku');
-            $size = $request->getAttribute('size');
+            $sku    = $request->getAttribute('sku');
+            $size   = $request->getAttribute('size');
             $result = $this->getService()->findBySkuAndSize($sku, $size);
         } catch (\RuntimeException $exc) {
             $$response->getBody()->write(
-                    json_encode(['message' => $exc->getMessage()])
+                json_encode(['message' => $exc->getMessage()])
             );
 
             return $$response->withStatus($exc->getCode());
@@ -28,17 +32,18 @@ class StockAction extends AbstractResource {
         $hal = $this->serialize($result);
         $response->getBody()->write($hal);
         return $response
-                        ->withHeader('etag', md5($hal))
-                        ->withHeader('cache-control', 'private')
-                        ->withHeader('content-type', 'application/json');
+                ->withHeader('etag', md5($hal))
+                ->withHeader('cache-control', 'private')
+                ->withHeader('content-type', 'application/json');
     }
 
-    protected function getClassName() {
-        return App\Model\Cms::class;
+    protected function getClassName(): string
+    {
+        return App\Model\Stock::class;
     }
 
-    protected function getORMName() {
+    protected function getORMName(): string
+    {
         return 'doctrine.entitymanager.orm_dafiti';
     }
-
 }

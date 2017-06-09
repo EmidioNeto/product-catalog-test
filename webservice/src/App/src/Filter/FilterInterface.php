@@ -8,6 +8,5 @@ namespace App\Filter;
  */
 interface FilterInterface
 {
-
-    public function filter($value);
+    public function filter(string $value): string;
 }

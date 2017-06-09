@@ -9,6 +9,7 @@ namespace App;
  */
 class ConfigProvider
 {
+
     /**
      * Returns the configuration array
      *
@@ -17,7 +18,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function __invoke()
+    public function __invoke(): array
     {
         return [
             'dependencies' => $this->getDependencies(),
@@ -29,13 +30,12 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             'invokables' => [
-                
             ],
-            'factories'  => [
+            'factories' => [
                 Action\HomePageAction::class => Action\HomePageFactory::class,
             ],
         ];
@@ -46,7 +46,7 @@ class ConfigProvider
      *
      * @return array
      */
-    public function getTemplates()
+    public function getTemplates(): array
     {
         return [];
     }

@@ -45,7 +45,6 @@ abstract class AbstractResource
         $this->urlHelper  = $container->get(UrlHelper::class);
         $namespace        = explode('\\', $this->getClassName());
         $serviceName      = array_pop($namespace);
-
         $serviceClass  = sprintf('App\Service\%s\%sService', $serviceName,
             $serviceName);
         $this->service = $container->get($serviceClass);
@@ -61,7 +60,7 @@ abstract class AbstractResource
      * @return string
      */
     public function serialize($data, $format = 'json',
-                              SerializationContext $context = null)
+                              SerializationContext $context = null): string
     {
         if ($context === null) {
             $context = new SerializationContext();
@@ -82,22 +81,22 @@ abstract class AbstractResource
      * @return object|array|scalar
      */
     public function deserialize($data, $type, $format = 'json',
-                                DeserializationContext $context = null)
+                                DeserializationContext $context = null): object
     {
         return $this->serializer->deserialize($data, $type, $format, $context);
     }
 
-    protected function getRouter()
+    protected function getRouter(): RouterInterface
     {
         return $this->router;
     }
 
-    protected function getConfig()
+    protected function getConfig(): \ArrayObject
     {
         return $this->config;
     }
 
-    protected function getSerializer()
+    protected function getSerializer(): Hateoas
     {
         return $this->serializer;
     }
@@ -124,7 +123,7 @@ abstract class AbstractResource
         $this->service = $service;
     }
 
-    abstract protected function getORMName();
+    abstract protected function getORMName(): string;
 
-    abstract protected function getClassName();
+    abstract protected function getClassName(): string;
 }

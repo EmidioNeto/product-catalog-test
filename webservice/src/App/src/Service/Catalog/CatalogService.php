@@ -22,22 +22,22 @@ class CatalogService implements \App\Service\ServiceInterface
         }
     }
 
-    function getEntityManager()
+    function getEntityManager(): \Doctrine\ORM\EntityManagerInterface
     {
         return $this->entityManager;
     }
 
-    function setEntityManager($entityManager)
+    function setEntityManager(\Doctrine\ORM\EntityManagerInterface$entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function getClassName()
+    public function getClassName(): string
     {
-        return null;
+        return "null";
     }
 
-    public function getORMName()
+    public function getORMName(): string
     {
         return 'doctrine.entitymanager.orm_dafiti';
     }

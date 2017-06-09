@@ -55,44 +55,42 @@ class Cms
      */
     private $idProduct;
 
-    function getId()
+    function getId():int 
     {
         return $this->id;
     }
 
-    function getContent()
+    function getContent() : string
     {
         return $this->content;
     }
 
-    function getRegion()
+    function getRegion(): string
     {
         return $this->region;
     }
 
-//    function getIdCategory(): \App\Model\Category
-    function getIdCategory()
+    function getIdCategory(): \App\Model\Category
     {
         return $this->idCategory;
     }
 
-//    function getIdProduct(): \App\Model\Product
-    function getIdProduct()
+    function getIdProduct(): \App\Model\Product
     {
         return $this->idProduct;
     }
 
-    function setId($id)
+    function setId(int $id)
     {
         $this->id = $id;
     }
 
-    function setContent($content)
+    function setContent(string $content)
     {
         $this->content = $content;
     }
 
-    function setRegion($region)
+    function setRegion(string $region)
     {
         $this->region = $region;
     }

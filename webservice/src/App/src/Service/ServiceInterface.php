@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Service;
 
 /**
@@ -7,5 +8,12 @@ namespace App\Service;
  */
 interface ServiceInterface
 {
-    //put your code here
+
+    function getORMName(): string;
+
+    function getClassName(): string;
+
+    function getEntityManager(): \Doctrine\ORM\EntityManagerInterface;
+
+    function setEntityManager(\Doctrine\ORM\EntityManagerInterface $entityManager);
 }

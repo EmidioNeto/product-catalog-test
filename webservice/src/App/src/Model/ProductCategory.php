@@ -41,24 +41,22 @@ class ProductCategory
      */
     private $idProduct;
 
-    function getId()
+    function getId():int 
     {
         return $this->id;
     }
 
-//    function getIdCategory(): \App\Model\Category
-    function getIdCategory()
+    function getIdCategory(): \App\Model\Category
     {
         return $this->idCategory;
     }
 
-//    function getIdProduct(): \App\Model\Product
-    function getIdProduct()
+    function getIdProduct(): \App\Model\Product
     {
         return $this->idProduct;
     }
 
-    function setId($id)
+    function setId(int $id)
     {
         $this->id = $id;
     }

@@ -7,10 +7,10 @@ namespace App\Validator;
  *
 * @author reginaldo.neto <emidioneto1@gmail.com>
  */
-class Required
+class Required implements ValidatorInterface
 {
 
-    public function isValid($value)
+    public function isValid(string $value) : bool
     {
         if ((empty($value) || is_null($value))) {
             return false;

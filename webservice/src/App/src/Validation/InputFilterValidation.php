@@ -20,37 +20,56 @@ class InputFilterValidation
         $this->errorMessages = [];
     }
 
-    function validate($data, $inputFilterSpecification)
+    function validate(array $data, array $inputFilterSpecification): bool
     {
         $valid = true;
-        if (is_array($data)) {
-            foreach ($data as $wms) {
-                foreach ((array) $wms as $attribute => $input) {
-                    if (isset($inputFilterSpecification[$attribute])) {
-                        $validators = null;
-                        if (isset($inputFilterSpecification[$attribute]['validators'])) {
-                            $validators = $inputFilterSpecification[$attribute]['validators'];
-                            foreach ($validators as $validator) {
-                                $validator = \App\Validator\Factory::invoke($validator);
-                                if (is_array($input)) {
-                                    foreach ($input as $value) {
-                                        if (!$validator->isValid($value)) {
-                                            $this->addInvalidInputs([$attribute => $value]);
-                                            $valid = false;
-//                                            throw new \RuntimeException("The value {$value} for the attribute {$attribute}  is invalid. ".get_class($validator));
-                                            $this->addErrorMessages("The value {$value} for the attribute {$attribute}  is invalid. ".get_class($validator));
-                                        }
-                                    }
-                                } else {
-                                    if (!$validator->isValid($input)) {
-                                        $this->addInvalidInputs([$attribute => $input]);
-                                        $valid = false;
-                                        $this->addErrorMessages("The value {$input} for the attribute {$attribute}  is invalid. ".get_class($validator));
-                                    }
-                                }
-                            }
-                        }
+        foreach ($data as $inputs) {
+            foreach ($inputs as $attribute => $input) {
+                if (isset($inputFilterSpecification[$attribute])) {
+                    if (!$this->validateInput($attribute, $input,
+                            $inputFilterSpecification)) {
+                        $valid = false;
                     }
+                }
+            }
+        }
+        return $valid;
+    }
+
+    function validateInput(string $attribute, $input, $inputFilterSpecification): bool
+    {
+        $validators = [];
+        $filters = [];
+        $valid      = true;
+
+        if (isset($inputFilterSpecification[$attribute]['validators'])) {
+            $validators = $inputFilterSpecification[$attribute]['validators'];
+        }
+
+        if (isset($inputFilterSpecification[$attribute]['filters'])) {
+            $filters = $inputFilterSpecification[$attribute]['filters'];
+        }
+
+        foreach ($filters as $filter) {
+            $filter = \App\Filter\Factory\Factory::invoke($filter);
+            $input = $filter->filter($input);
+        }
+
+        foreach ($validators as $validator) {
+            $validator = \App\Validator\Factory::invoke($validator);
+            if (is_array($input)) {
+                foreach ($input as $value) {
+                    if (!$validator->isValid($value)) {
+                        $this->addInvalidInputs([$attribute => $value]);
+                        $this->addErrorMessages("The value {$value} for the attribute {$attribute}  is invalid. ".get_class($validator));
+                        $valid = false;
+                    }
+                }
+            } else {
+                if (!$validator->isValid($input)) {
+                    $this->addInvalidInputs([$attribute => $input]);
+                    $this->addErrorMessages("The value {$input} for the attribute {$attribute}  is invalid. ".get_class($validator));
+                    $valid = false;
                 }
             }
         }

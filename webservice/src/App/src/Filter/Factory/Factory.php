@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filter;
+namespace App\Filter\Factory;
 
 /**
  * Description of Factory
@@ -10,7 +10,7 @@ namespace App\Filter;
 class Factory
 {
 
-    public static function invoke($requestedName)
+    public static function invoke(string $requestedName): \App\Filter\FilterInterface
     {
         return new $requestedName();
     }

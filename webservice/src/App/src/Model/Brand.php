@@ -28,22 +28,22 @@ class Brand
      */
     private $name;
 
-    function getId()
+    function getId(): int
     {
         return $this->id;
     }
 
-    function getName()
+    function getName(): string
     {
         return $this->name;
     }
 
-    function setId($id)
+    function setId(int $id)
     {
         $this->id = $id;
     }
 
-    function setName($name)
+    function setName(string $name)
     {
         $this->name = $name;
     }

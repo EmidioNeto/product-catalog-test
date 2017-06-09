@@ -10,7 +10,7 @@ namespace App\Validator;
 class Factory
 {
 
-    public static function invoke($requestedName)
+    public static function invoke($requestedName): ValidatorInterface
     {
         return new $requestedName();
     }

@@ -48,34 +48,32 @@ class Stock
      */
     private $idWarehouse;
 
-    function getId()
+    function getId(): int
     {
         return $this->id;
     }
 
-    function getQuantity()
+    function getQuantity() : int
     {
         return $this->quantity;
     }
 
-//    function getIdProductSize(): \App\Model\ProductSize
-    function getIdProductSize()
+    function getIdProductSize(): \App\Model\ProductSize
     {
         return $this->idProductSize;
     }
 
-//    function getIdWarehouse(): \App\Model\Warehouse
-    function getIdWarehouse()
+    function getIdWarehouse(): int
     {
         return $this->idWarehouse->getId();
     }
 
-    function setId($id)
+    function setId(int $id)
     {
         $this->id = $id;
     }
 
-    function setQuantity($quantity)
+    function setQuantity(int $quantity)
     {
         $this->quantity = $quantity;
     }

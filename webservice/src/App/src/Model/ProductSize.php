@@ -41,19 +41,17 @@ class ProductSize
      */
     private $idSize;
 
-    function getId()
+    function getId():int 
     {
         return $this->id;
     }
 
-//    function getIdProduct(): \App\Model\Product
-    function getIdProduct()
+    function getIdProduct(): \App\Model\Product
     {
         return $this->idProduct;
     }
 
-//    function getIdSize(): \App\Model\Size
-    function getIdSize()
+    function getIdSize(): \App\Model\Size
     {
         return $this->idSize;
     }

@@ -10,7 +10,7 @@ namespace App\Rules;
 class WmsRules implements RuleInterface
 {
 
-    public function getInputFilterSpecification()
+    public function getInputFilterSpecification(): array
     {
         return [
             'sku' => [

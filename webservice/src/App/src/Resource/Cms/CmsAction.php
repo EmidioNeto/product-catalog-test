@@ -5,16 +5,20 @@ namespace App\Resource\Cms;
 use Psr\Http\Message\ServerRequestInterface;
 use App\Resource\AbstractResource;
 
-class CmsAction extends AbstractResource {
+class CmsAction extends AbstractResource
+{
 
-    public function __invoke(ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response, callable $next = null) {
+    public function __invoke(ServerRequestInterface $request,
+                             \Psr\Http\Message\ResponseInterface $response,
+                             callable $next = null)
+    {
         try {
-            $sku = $request->getAttribute('sku');
+            $sku      = $request->getAttribute('sku');
             $category = $request->getAttribute('category');
-            $result = $this->getService()->findBySkuOrCategory($sku, $category);
+            $result   = $this->getService()->findBySkuOrCategory($sku, $category);
         } catch (\RuntimeException $exc) {
             $$response->getBody()->write(
-                    json_encode(['message' => $exc->getMessage()])
+                json_encode(['message' => $exc->getMessage()])
             );
 
             return $$response->withStatus($exc->getCode());
@@ -26,17 +30,18 @@ class CmsAction extends AbstractResource {
         $hal = $this->serialize($result);
         $response->getBody()->write($hal);
         return $response
-                        ->withHeader('etag', md5($hal))
-                        ->withHeader('cache-control', 'private')
-                        ->withHeader('content-type', 'application/json');
+                ->withHeader('etag', md5($hal))
+                ->withHeader('cache-control', 'private')
+                ->withHeader('content-type', 'application/json');
     }
 
-    protected function getClassName() {
+    protected function getClassName(): string
+    {
         return App\Model\Cms::class;
     }
 
-    protected function getORMName() {
+    protected function getORMName(): string
+    {
         return 'doctrine.entitymanager.orm_dafiti';
     }
-
 }

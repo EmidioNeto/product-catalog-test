@@ -54,22 +54,22 @@ class CatalogAction extends AbstractResource
                 ->withHeader('content-type', 'application/json');
     }
 
-    protected function getClassName()
+    protected function getClassName(): string
     {
         return App\Model\Cms::class;
     }
 
-    protected function getORMName()
+    protected function getORMName(): string
     {
         return 'doctrine.entitymanager.orm_dafiti';
     }
 
-    function getInputFilter()
+    function getInputFilter(): \App\Validation\InputFilterValidation
     {
         return $this->inputFilter;
     }
 
-    function setInputFilter($inputFilter)
+    function setInputFilter(\App\Validation\InputFilterValidation $inputFilter)
     {
         $this->inputFilter = $inputFilter;
     }

@@ -22,28 +22,28 @@ class CmsService implements \App\Service\ServiceInterface
         }
     }
 
-    function findBySkuAndSize($sku, $size)
+    function findBySkuOrCategory($sku, $category): array
     {
-        return $this->getEntityManager()->getRepository($this->getClassName())->findBySkuAndSize($sku,
-                $size);
+        return $this->getEntityManager()->getRepository($this->getClassName())->findBySkuOrCategory($sku,
+                $category);
     }
 
-    function getEntityManager()
+    function getEntityManager(): \Doctrine\ORM\EntityManagerInterface
     {
         return $this->entityManager;
     }
 
-    function setEntityManager($entityManager)
+    function setEntityManager(\Doctrine\ORM\EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    public function getClassName()
+    public function getClassName(): string
     {
-        return \App\Model\Stock::class;
+        return \App\Model\Cms::class;
     }
 
-    public function getORMName()
+    public function getORMName(): string
     {
         return 'doctrine.entitymanager.orm_dafiti';
     }

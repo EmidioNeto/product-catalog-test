@@ -91,101 +91,100 @@ class Product
         $this->productCategories = new ArrayCollection();
         $this->productSizes      = new ArrayCollection();
         $this->categories        = new ArrayCollection();
-        $this->sizes        = new ArrayCollection();
+        $this->sizes             = new ArrayCollection();
     }
 
-    function getId()
+    function getId(): int
     {
         return $this->id;
     }
 
-    function getSku()
+    function getSku(): string
     {
         return $this->sku;
     }
 
-    function getPrice()
+    function getPrice(): float
     {
         return $this->price;
     }
 
-    function getName()
+    function getName(): string
     {
         return $this->name;
     }
 
-    function getDescription()
+    function getDescription(): string
     {
         return $this->description;
     }
 
-    function getProductImageUrl()
+    function getProductImageUrl(): string
     {
         return $this->productImageUrl;
     }
 
-    function getSpecialPrice()
+    function getSpecialPrice(): float
     {
         return $this->specialPrice;
     }
 
-//    function getIdBrand(): \App\Model\Brand
-    function getIdBrand()
+    function getIdBrand(): \App\Model\Brand
     {
         return $this->idBrand;
     }
 
-    function getProductCategories()
+    function getProductCategories() : \Doctrine\ORM\PersistentCollection
     {
         return $this->productCategories;
     }
 
-    function getCategories()
+    function getCategories(): ArrayCollection
     {
         return $this->categories;
     }
 
-    function getProductSizes()
+    function getProductSizes(): \Doctrine\ORM\PersistentCollection
     {
         return $this->productSizes;
     }
 
-    function getSizes()
+    function getSizes(): ArrayCollection
     {
         return $this->sizes;
     }
 
-    function setId($id)
+    function setId(int $id)
     {
         $this->id = $id;
     }
 
-    function setSku($sku)
+    function setSku(string $sku)
     {
         $this->sku = $sku;
     }
 
-    function setPrice($price)
+    function setPrice(float $price)
     {
         $this->price = $price;
     }
 
-    function setName($name)
+    function setName(string $name)
     {
         $this->name = $name;
     }
 
-    function setDescription($description)
+    function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    function setProductImageUrl($productImageUrl)
+    function setProductImageUrl(string $productImageUrl)
     {
         $this->productImageUrl = $productImageUrl;
     }
 
-    function setSpecialPrice($specialPrice)
+    function setSpecialPrice(float $specialPrice)
     {
         $this->specialPrice = $specialPrice;
     }
@@ -195,25 +194,23 @@ class Product
         $this->idBrand = $idBrand;
     }
 
-    function setProductCategories($productCategories)
+    function setProductCategories(ArrayCollection $productCategories)
     {
         $this->productCategories = $productCategories;
     }
 
-    function setCategories($categories)
+    function setCategories(ArrayCollection $categories)
     {
         $this->categories = $categories;
     }
 
-    function setProductSizes($productSizes)
+    function setProductSizes(ArrayCollection $productSizes)
     {
         $this->productSizes = $productSizes;
     }
 
-    function setSizes($sizes)
+    function setSizes(ArrayCollection $sizes)
     {
         $this->sizes = $sizes;
     }
-
-
 }

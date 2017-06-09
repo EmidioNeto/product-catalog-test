@@ -22,28 +22,28 @@ class StockService implements \App\Service\ServiceInterface
         }
     }
 
-    function getEntityManager()
+    function getEntityManager(): \Doctrine\ORM\EntityManagerInterface
     {
         return $this->entityManager;
     }
 
-    function setEntityManager($entityManager)
+    function setEntityManager(\Doctrine\ORM\EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
-    function findBySkuAndSize($sku, $size)
+    function findBySkuAndSize($sku, $size): array
     {
         return $this->getEntityManager()->getRepository($this->getClassName())->findBySkuAndSize($sku,
                 $size);
     }
 
-    public function getClassName()
+    public function getClassName(): string
     {
         return \App\Model\Stock::class;
     }
 
-    public function getORMName()
+    public function getORMName(): string
     {
         return 'doctrine.entitymanager.orm_dafiti';
     }
